@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tavo Tinklalapis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+        }
+        nav a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .content {
+            padding: 20px;
+        }
+        .section {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        /* Chat box styles */
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .chat-box {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+            color: blue;
+        }
+        .bot-message {
+            text-align: left;
+            color: green;
+        }
+        .input-container {
+            display: flex;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .input-container button {
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 8px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        .input-container button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tavo Tinklalapis</h1>
+        <p>Naujienos ir aktualijos, technologijos ir naujovės, pomėgiai ir „pasidaryk pats“, finansai ir verslas</p>
+    </header>
+    <nav>
+        <a href="#technologijos">Technologijos ir naujovės</a>
+        <a href="#naujienos">Naujienos ir aktualijos</a>
+        <a href="#pomėgiai">Pomėgiai ir „pasidaryk pats“</a>
+        <a href="#finansai">Finansai ir verslas</a>
+        <a href="#chat">Pokalbiai</a>
+    </nav>
+    <div class="content">
+        <div id="technologijos" class="section">
+            <h2>Technologijos ir naujovės</h2>
+            <p>Čia rasite naujausias žinias apie technologijas, programėles, įrenginius ir kitus naujoves.</p>
+        </div>
+        <div id="naujienos" class="section">
+            <h2>Naujienos ir aktualijos</h2>
+            <p>Sužinokite naujausias pasaulio ir vietines naujienas bei nuomones.</p>
+        </div>
+        <div id="pomėgiai" class="section">
+            <h2>Pomėgiai ir „pasidaryk pats“</h2>
+            <p>Atraskite įdomius DIY projektus, patarimus ir rankdarbius.</p>
+        </div>
+        <div id="finansai" class="section">
+            <h2>Finansai ir verslas</h2>
+            <p>Gaukite patarimus apie investavimą, asmeninius finansus ir verslo idėjas bei tendencijas.</p>
+        </div>
+        <div id="chat" class="section">
+            <h2>Pokalbiai</h2>
+            <div class="chat-container">
+                <div id="chat-box" class="chat-box"></div>
+                <div class="input-container">
+                    <input type="text" id="user-input" placeholder="Įveskite žinutę">
+                    <button onclick="sendMessage()">Siųsti</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Tavo Tinklalapis</p>
+        <p><a href="mailto:info@tavotinklalapis.lt" style="color: #fff;">Susisiekite su mumis</a></p>
+    </footer>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === '') return;
+
+            // Display user message
+            const chatBox = document.getElementById('chat-box');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = userInput;
+            chatBox.appendChild(userMessage);
+
+            // Clear the input
+            document.getElementById('user-input').value = '';
+
+            // Simulate bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.textContent = 'Bot: ' + generateBotResponse(userInput);
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+
+        function generateBotResponse(userInput) {
+            // Simple bot logic for demonstration
+            const responses = {
+                'labas': 'Labas! Kaip sekasi?',
+                'kaip sekasi?': 'Man viskas gerai, ačiū! O tau?',
+                'kas tu?': 'Aš esu pokalbių robotas, sukurtas tau padėti.',
+                'viso gero': 'Viso gero! Gero dienos!'
+            };
+            return responses[userInput.toLowerCase()] || 'Atsiprašau, aš nesupratau klausimo.';
+        }
+    </script>
+</body>
+</html>
